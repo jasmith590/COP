@@ -8,37 +8,55 @@ var program = require('commander');
 var to = require('..');
 var handy = require('handy');
 
-var doc = "";
-
-// to -i inpfile.fmt [-o outfile.fmt | -o fmt]
-//   - fmt dictates the data format
-var _versionString = 'to v'+to.version;
+var doc = "",
+    stdIn = process.stdin,
+    _versionString = 'to v'+to.version,
+    inputformat, outputformat,
+    inputString;
 
 program
     .version(_versionString)
-    .option('-i, --input <input>', 'Input file. Extension of file dictates the input format')
-    .option('-o, --output <output>', 'Output file or just extension (if only extension given, stdout is used)')
+    .option('-i, --input <input>', 'Input file')
+    .option('-o, --output <output>', 'Output file')
+    .option('-from, --from <format>', 'Test help for input format')
+    .option('-to, --to <format>', 'Test help for output format (stdout is used)')
     .parse(process.argv);
 
-var inputformat = handy.getFileExtension(program.input, 'json');
-var outputformat = handy.getFileExtension(program.output, 'json');
+inputformat = handy.getFileExtension(program.input, 'json');
+outputformat = handy.getFileExtension(program.output, 'json');
 
-if (!process.argv.slice(2).length) {
-    program.outputHelp();
-    process.exit(1);
+if (program.input) {
+    console.log("==== option parser ====");
+
+    if (!process.argv.slice(2).length) {
+        program.outputHelp();
+        process.exit(1);
+    }
+
+    // validate formats
+    if(!to.isValidFormat(inputformat) || !to.isValidFormat(outputformat)) {
+        program.outputHelp();
+        console.log('*** do not know how to process format:'+(to.isValidFormat(inputformat)?outputformat:inputformat));
+        process.exit(1);
+    }
+
+    // convert yml to yaml
+    outputformat = outputformat=='yml'?'yaml':outputformat;
+
+    // load appropriate format
+    doc=to.load(program.input);
+
+    console.log(to.format[outputformat].stringify(doc));
+
+} else {
+    console.log("==== STDIN ====");
+
+    stdIn.on('data', (chunk) => {
+        doc += chunk.toString();
+    });
+
+    stdIn.on('end', () => {
+        console.log(doc);
+        console.log(doc.length);
+    });
 }
-
-// validate formats
-if(!to.isValidFormat(inputformat) || !to.isValidFormat(outputformat)) {
-    program.outputHelp();
-    console.log('*** do not know how to process format:'+(to.isValidFormat(inputformat)?outputformat:inputformat));
-    process.exit(1);
-}
-
-// convert yml to yaml
-outputformat = outputformat=='yml'?'yaml':outputformat;
-
-// load appropriate format
-doc=to.load(program.input);
-//@todo: Need to write to the output file
-console.log(to.format[outputformat].stringify(doc));
