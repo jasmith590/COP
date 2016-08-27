@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+/**
+ * to - copyright(c) 2012 openmason.
+ * MIT Licensed
+ */
+
+var program = require('commander');
+var to = require('..');
+var handy = require('handy');
+
+var doc = "";
+
+// to -i inpfile.fmt [-o outfile.fmt | -o fmt]
+//   - fmt dictates the data format
+var _versionString = 'to v'+to.version;
+
+program
+    .version(_versionString)
+    .option('-i, --input <input>', 'Input file. Extension of file dictates the input format')
+    .option('-o, --output <output>', 'Output file or just extension (if only extension given, stdout is used)')
+    .parse(process.argv);
+
+var inputformat = handy.getFileExtension(program.input, 'json');
+var outputformat = handy.getFileExtension(program.output, 'json');
+
+if (!process.argv.slice(2).length) {
+    program.outputHelp();
+    process.exit(1);
+}
+
+// validate formats
+if(!to.isValidFormat(inputformat) || !to.isValidFormat(outputformat)) {
+    program.outputHelp();
+    console.log('*** do not know how to process format:'+(to.isValidFormat(inputformat)?outputformat:inputformat));
+    process.exit(1);
+}
+
+// convert yml to yaml
+outputformat = outputformat=='yml'?'yaml':outputformat;
+
+// load appropriate format
+doc=to.load(program.input);
+//@todo: Need to write to the output file
+console.log(to.format[outputformat].stringify(doc));
