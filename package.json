@@ -30,7 +30,8 @@
   "main": "index",
   "scripts": {
     "prepublish": "npm prune",
-    "test": "make test"
+    "test": "make test",
+    "debug": "cat examples/sample.yml | bin/cop -f yml -t json"
   },
   "engines": {
     "node": ">= 0.8.0"

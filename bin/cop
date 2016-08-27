@@ -11,15 +11,14 @@ var handy = require('handy');
 var doc = "",
     stdIn = process.stdin,
     _versionString = 'to v'+to.version,
-    inputformat, outputformat,
-    inputString;
+    inputformat, outputformat;
 
 program
     .version(_versionString)
     .option('-i, --input <input>', 'Input file')
     .option('-o, --output <output>', 'Output file')
-    .option('-from, --from <format>', 'Test help for input format')
-    .option('-to, --to <format>', 'Test help for output format (stdout is used)')
+    .option('-f, --from <format>', 'Test help for input format')
+    .option('-t, --to <format>', 'Test help for output format (stdout is used)')
     .parse(process.argv);
 
 inputformat = handy.getFileExtension(program.input, 'json');
@@ -29,24 +28,16 @@ if (program.input) {
     console.log("==== option parser ====");
 
     if (!process.argv.slice(2).length) {
-        program.outputHelp();
-        process.exit(1);
+        showHelp();
     }
 
     // validate formats
     if(!to.isValidFormat(inputformat) || !to.isValidFormat(outputformat)) {
-        program.outputHelp();
         console.log('*** do not know how to process format:'+(to.isValidFormat(inputformat)?outputformat:inputformat));
-        process.exit(1);
+        showHelp();
     }
 
-    // convert yml to yaml
-    outputformat = outputformat=='yml'?'yaml':outputformat;
-
-    // load appropriate format
-    doc=to.load(program.input);
-
-    console.log(to.format[outputformat].stringify(doc));
+    output(true, program.output, program.input);
 
 } else {
     console.log("==== STDIN ====");
@@ -56,7 +47,35 @@ if (program.input) {
     });
 
     stdIn.on('end', () => {
-        console.log(doc);
-        console.log(doc.length);
+        output(false, program.to, doc, program.from);
     });
+
+    stdIn.on('readable', () => {
+        if(doc.length === 0){
+            showHelp();
+        }
+    });
+
+    stdIn.on('error', process.exit);
+}
+
+function output (fileToLoad, outputformat, input, inputformat) {
+    // convert yml to yaml
+    outputformat = (!outputformat || outputformat == 'yml') ? 'yaml' : outputformat;
+
+    // load appropriate format
+    if(fileToLoad) {
+        doc = to.load(input);
+    } else {
+        doc = to.load(input, inputformat);
+    }
+
+    // console.log(doc);
+
+    console.log(to.format[outputformat].stringify(doc));
+}
+
+function showHelp() {
+    program.outputHelp();
+    process.exit(1);
 }
