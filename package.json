@@ -1,26 +1,38 @@
 {
-  "name": "to",
+  "name": "cop",
   "description": "load/convert between xml,json,yaml formats",
-  "homepage": "https://github.com/openmason/to",
+  "homepage": "https://github.com/BlueAcornInc/devops-cop",
   "version": "0.2.9",
-  "author": "el aras <openmason@gmail.com>",
+  "author": "el aras + Jamie Smith",
+  "license": "UNLICENSED",
   "dependencies": {
-    "handy"        : ">= 0.0.11",
-    "underscore"   : ">= 1.4.0",
-    "js-yaml"      : ">= 1.0.2",
-    "htmlparser"   : ">= 1.7.6",
-    "optimist"     : ">= 0.3.5"
+    "commander": "^2.9.0",
+    "handy": ">= 0.0.11",
+    "htmlparser": ">= 1.7.6",
+    "js-yaml": ">= 1.0.2",
+    "underscore": ">= 1.4.0"
   },
   "devDependencies": {
-    "mocha"            : ">= 1.6.0",
-    "should"           : ">= 1.2.0"
+    "mocha": ">= 1.6.0",
+    "should": ">= 1.2.0"
   },
-  "keywords": ["converter", "convertor", "json", "xml", "yaml"],
-  "repository": {"type":"git", "url": "git://github.com/openmason/to"},
+  "keywords": [
+    "converter",
+    "convertor",
+    "json",
+    "xml",
+    "yaml"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BlueAcornInc/devops-cop"
+  },
   "main": "index",
-  "scripts": { 
-    "prepublish" : "npm prune",
-    "test" : "make test" 
+  "scripts": {
+    "prepublish": "npm prune",
+    "test": "make test"
   },
-  "engines": { "node":">= 0.8.0" }
+  "engines": {
+    "node": ">= 0.8.0"
+  }
 }
