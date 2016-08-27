@@ -1,5 +1,6 @@
 .DS_Store
 lib-cov
+.idea/
 *.seed
 *.log
 *.csv
