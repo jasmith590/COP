@@ -10,11 +10,10 @@ var handy = require('handy');
 
 var doc = "",
     stdIn = process.stdin,
-    _versionString = 'to v'+to.version,
     inputformat, outputformat;
 
 program
-    .version(_versionString)
+    .version('v' + to.version)
     .option('-i, --input <input>', 'Input file')
     .option('-o, --output <output>', 'Output file')
     .option('-f, --from <format>', 'Test help for input format')
@@ -31,14 +30,17 @@ if (program.input) {
     }
 
     // validate formats
-    if(!to.isValidFormat(inputformat) || !to.isValidFormat(outputformat)) {
-        console.log('*** do not know how to process format:'+(to.isValidFormat(inputformat)?outputformat:inputformat));
-        showHelp();
-    }
+    isValidExt(inputformat, outputformat);
 
     output(true, program.output, program.input);
 
 } else {
+
+    outputformat = program.to;
+    inputformat = program.from;
+
+    // validate formats
+    isValidExt(inputformat, outputformat);
 
     stdIn.on('data', (chunk) => {
         doc += chunk.toString();
@@ -70,6 +72,13 @@ function output (fileToLoad, outputformat, input, inputformat) {
     }
 
     console.log(to.format[outputformat].stringify(doc));
+}
+
+function isValidExt(input, output) {
+    if(!to.isValidFormat(input) || !to.isValidFormat(output)) {
+        console.log('*** do not know how to process format : ' + (to.isValidFormat(inputformat) ? outputformat :inputformat));
+        showHelp();
+    }
 }
 
 function showHelp() {
