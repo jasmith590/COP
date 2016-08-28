@@ -1,6 +1,6 @@
 {
   "name": "cop",
-  "description": "load/convert between xml,json,yaml formats",
+  "description": "load/convert between xml,json,yaml,shell formats",
   "homepage": "https://github.com/BlueAcornInc/devops-cop",
   "version": "0.2.9",
   "author": "el aras + Jamie Smith",
@@ -30,8 +30,7 @@
   "main": "index",
   "scripts": {
     "prepublish": "npm prune",
-    "test": "make test",
-    "debug": "cat examples/sample.yml | bin/cop -f yml -t json"
+    "test": "make test"
   },
   "engines": {
     "node": ">= 0.8.0"

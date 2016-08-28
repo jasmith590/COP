@@ -18,10 +18,16 @@ program
     .option('-o, --output <output>', 'Output file')
     .option('-f, --from <format>', 'Test help for input format')
     .option('-t, --to <format>', 'Test help for output format (stdout is used)')
-    .parse(process.argv);
+    .parse(process.argv)
+    .on('--help', function(){
+        console.log('  Examples:');
+        console.log('');
+        console.log('    $ cat examples/sample.xml | bin/cop -f xml -t json');
+        console.log('    $ bin/cop -i examples/sample.xml -o json');
+        console.log('');
+    });
 
 if (program.input) {
-
     inputformat = handy.getFileExtension(program.input, 'json');
     outputformat = handy.getFileExtension(program.output, 'json');
 
@@ -32,12 +38,16 @@ if (program.input) {
     // validate formats
     isValidExt(inputformat, outputformat);
 
+    // output to stdout
     output(true, program.output, program.input);
 
 } else {
-
     outputformat = program.to;
     inputformat = program.from;
+
+    if (!process.argv.slice(2).length) {
+        showHelp();
+    }
 
     // validate formats
     isValidExt(inputformat, outputformat);
@@ -47,7 +57,8 @@ if (program.input) {
     });
 
     stdIn.on('end', () => {
-        output(false, program.to, doc, program.from);
+        // output to stdout
+        output(false, outputformat, doc, inputformat);
     });
 
     stdIn.on('readable', () => {
