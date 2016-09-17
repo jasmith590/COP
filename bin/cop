@@ -15,15 +15,14 @@ var doc = "",
 program
     .version('v' + to.version)
     .option('-i, --input <input>', 'Input file')
-    .option('-o, --output <output>', 'Output file')
     .option('-f, --from <format>', 'Test help for input format')
     .option('-t, --to <format>', 'Test help for output format (stdout is used)')
     .parse(process.argv)
     .on('--help', function(){
         console.log('  Examples:');
         console.log('');
-        console.log('    $ cat examples/sample.xml | bin/cop -f xml -t json');
-        console.log('    $ bin/cop -i examples/sample.xml -o json');
+        console.log('    $ cat examples/sample.xml | bin/cop --from xml --to json');
+        console.log('    $ bin/cop --input examples/sample.xml --to json');
         console.log('');
     });
 
@@ -39,7 +38,7 @@ if (program.input) {
     isValidExt(inputformat, outputformat);
 
     // output to stdout
-    output(true, program.output, program.input);
+    output(true, program.to, program.input);
 
 } else {
     outputformat = program.to;
