@@ -1,4 +1,4 @@
 /**
  * to.js - main file
  */
-module.exports = require('./lib/to');
+module.exports = require('./lib/cop');

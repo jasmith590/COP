@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-/**
- * to - copyright(c) 2012 openmason.
- * MIT Licensed
- */
 
 var program = require('commander');
-var to = require('..');
+var cop = require('..');
 var handy = require('handy');
 
 var doc = "",
     stdIn = process.stdin,
     inputformat, outputformat;
 
+/**
+ * Setup Input and Output
+ */
+
 program
-    .version('v' + to.version)
+    .version('v' + cop.version)
     .option('-i, --input <input>', 'Input file')
     .option('-f, --from <format>', 'Test help for input format')
     .option('-t, --to <format>', 'Test help for output format (stdout is used)')
@@ -34,11 +34,8 @@ if (program.input) {
         showHelp();
     }
 
-    // validate formats
-    isValidExt(inputformat, outputformat);
-
     // output to stdout
-    output(true, program.to, program.input);
+    output(true, program.input.toLowerCase(), program.to.toLowerCase());
 
 } else {
     outputformat = program.to;
@@ -48,16 +45,14 @@ if (program.input) {
         showHelp();
     }
 
-    // validate formats
-    isValidExt(inputformat, outputformat);
-
     stdIn.on('data', (chunk) => {
         doc += chunk.toString();
     });
 
     stdIn.on('end', () => {
         // output to stdout
-        output(false, outputformat, doc, inputformat);
+        console.log(doc);
+        output(false, doc, outputformat, inputformat);
     });
 
     stdIn.on('readable', () => {
@@ -69,24 +64,26 @@ if (program.input) {
     stdIn.on('error', process.exit);
 }
 
-function output (fileToLoad, outputformat, input, inputformat) {
+function output (fileToLoad, input, outputformat, inputformat) {
 
     // convert yml to yaml
     outputformat = (!outputformat || outputformat == 'yml') ? 'yaml' : outputformat;
 
     // load appropriate format
     if(fileToLoad) {
-        doc = to.load(input);
+        // gather all input streams
+        doc = cop.gatherInputs(input);
     } else {
-        doc = to.load(input, inputformat);
+        doc = cop.gatherInputs(input, inputformat);
     }
 
-    console.log(to.format[outputformat].stringify(doc));
+    console.log(cop.format[outputformat].stringify(doc));
 }
 
-function isValidExt(input, output) {
-    if(!to.isValidFormat(input) || !to.isValidFormat(output)) {
-        console.log('*** do not know how to process format : ' + (to.isValidFormat(inputformat) ? outputformat :inputformat));
+function isValidExt(input, inputFormat, outputFormat) {
+
+    if(!cop.isValidFormat(inputFormat) || !cop.isValidFormat(outputFormat)) {
+        console.log('*** do not know how to process format : ' + (cop.isValidFormat(inputFormat) ? outputFormat : inputFormat));
         showHelp();
     }
 }
