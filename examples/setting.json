@@ -1,0 +1,26 @@
+{
+  "defaults": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 100
+  },
+  "development": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 800
+  },
+  "test": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 99
+  },
+  "production": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 99
+  }
+}

@@ -10,7 +10,7 @@
     "handy": ">= 0.0.11",
     "htmlparser": ">= 1.7.6",
     "js-yaml": ">= 1.0.2",
-    "lodash": "^4.16.0",
+    "js2xmlparser": "^2.0.2",
     "underscore": ">= 1.4.0"
   },
   "devDependencies": {
