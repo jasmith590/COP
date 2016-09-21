@@ -1,4 +1,4 @@
 /**
- * to.js - main file
+ * cop.js - main file
  */
 module.exports = require('./lib/cop');
