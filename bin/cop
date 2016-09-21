@@ -22,8 +22,10 @@ program
     .on('--help', function(){
         console.log('  Examples:');
         console.log('');
-        console.log('    $ cat examples/sample.xml | bin/cop --from xml --to json');
-        console.log('    $ bin/cop --input examples/sample.xml --to json');
+        console.log('    $ cat examples/setting.xml | bin/cop --from xml --to json');
+        console.log('    $ bin/cop --input examples/setting.xml --to json');
+        console.log('    $ bin/cop --input examples/setting.json,examples/setting.yml --to json');
+        console.log('    $ bin/cop --input examples/setting.json,examples/setting.yml --template examples/views/Dockerfile.hbs');
         console.log('');
     });
 
@@ -36,7 +38,7 @@ if (program.input) {
     }
 
     // output to stdout
-    output(true, program.input.toLowerCase(), program.to.toLowerCase());
+    output(true, program.input, program.to);
 
 } else {
     outputformat = program.to;
@@ -52,7 +54,6 @@ if (program.input) {
 
     stdIn.on('end', () => {
         // output to stdout
-        console.log(doc);
         output(false, doc, outputformat, inputformat);
     });
 
@@ -84,14 +85,6 @@ function output (fileToLoad, input, outputformat, inputformat) {
         console.log(cop.render(program.template, doc));
     }
 
-}
-
-function isValidExt(input, inputFormat, outputFormat) {
-
-    if(!cop.isValidFormat(inputFormat) || !cop.isValidFormat(outputFormat)) {
-        console.log('*** do not know how to process format : ' + (cop.isValidFormat(inputFormat) ? outputFormat : inputFormat));
-        showHelp();
-    }
 }
 
 function showHelp() {
