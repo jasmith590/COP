@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "from": "alpine:3.2"
+  },
+  "development": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 800,
+    "from": "alpine:3.2"
+  },
+  "test": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 99,
+    "from": "alpine:3.2"
+  },
+  "production": {
+    "cool": {
+      "sweet": "nested settings"
+    },
+    "neat_setting": 99,
+    "from": "alpine:3.2"
+  }
+}

@@ -17,4 +17,11 @@ describe('Input Arguements', function() {
             done();
         });
     });
+
+    it("Valid input for multiple input files", function(done) {
+        exec(helpers.appRoot + 'bin/cop --input examples/setting.json,examples/setting.yml --to json', function(error, stdout, stderr) {
+            expect(stdout).to.equal(helpers.readFixture("settings.json"));
+            done();
+        });
+    });
 });
