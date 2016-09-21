@@ -2,7 +2,7 @@
 defaults: &defaults
   cool:
     sweet: nested settings
-  neat_setting: 24
+  from: alpine:3.2
 
 development:
   <<: *defaults
@@ -13,4 +13,3 @@ test:
 
 production:
   <<: *defaults
-

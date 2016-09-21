@@ -15,8 +15,9 @@ var doc = "",
 program
     .version('v' + cop.version)
     .option('-i, --input <input>', 'Input file')
-    .option('-f, --from <format>', 'Test help for input format')
-    .option('-t, --to <format>', 'Test help for output format (stdout is used)')
+    .option('-f, --from <format>', 'Input format')
+    .option('-t, --to <format>', 'Output format')
+    .option('-T, --template [template]', 'Template')
     .parse(process.argv)
     .on('--help', function(){
         console.log('  Examples:');
@@ -77,7 +78,12 @@ function output (fileToLoad, input, outputformat, inputformat) {
         doc = cop.gatherInputs(input, inputformat);
     }
 
-    console.log(cop.format[outputformat].stringify(doc));
+    if(!program.template) {
+        console.log(cop.format[outputformat].stringify(doc));
+    } else {
+        console.log(cop.render(program.template, doc));
+    }
+
 }
 
 function isValidExt(input, inputFormat, outputFormat) {

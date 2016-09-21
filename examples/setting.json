@@ -3,7 +3,8 @@
     "cool": {
       "sweet": "nested settings"
     },
-    "neat_setting": 100
+    "from": "alpine:3.1",
+    "jamie": "smith"
   },
   "development": {
     "cool": {

@@ -11,6 +11,7 @@
     "htmlparser": ">= 1.7.6",
     "js-yaml": ">= 1.0.2",
     "js2xmlparser": "^2.0.2",
+    "lodash": "^4.16.1",
     "underscore": ">= 1.4.0"
   },
   "devDependencies": {
