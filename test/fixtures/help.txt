@@ -1,0 +1,19 @@
+
+  Usage: cop [options]
+
+  Options:
+
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -i, --input <input>        Input file
+    -f, --from <format>        Input format
+    -t, --to <format>          Output format
+    -T, --template [template]  Template
+
+  Examples:
+
+    $ cat examples/setting.xml | bin/cop --from xml --to json
+    $ bin/cop --input examples/setting.xml --to json
+    $ bin/cop --input examples/setting.json,examples/setting.yml --to json
+    $ bin/cop --input examples/setting.json,examples/setting.yml --template examples/views/Dockerfile.hbs
+

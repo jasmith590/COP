@@ -15,6 +15,7 @@
     "underscore": ">= 1.4.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "mocha": ">= 1.6.0",
     "should": ">= 1.2.0"
   },

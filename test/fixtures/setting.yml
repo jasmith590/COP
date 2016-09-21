@@ -1,0 +1,16 @@
+defaults: 
+  cool: 
+    sweet: "nested settings"
+  from: "alpine:3.1"
+development: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 800
+test: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99
+production: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99
