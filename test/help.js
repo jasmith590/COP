@@ -3,7 +3,7 @@ var helpers = require('./helpers');
 var expect = require("chai").expect;
 var exec = require('child_process').exec;
 
-describe('help', function() {
+describe('CLI - help', function() {
 
     describe("Test Basic API", function() {
         it("bin/cop", function(done) {

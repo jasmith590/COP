@@ -43,4 +43,3 @@ ENTRYPOINT ["/docker/entrypoint.sh"]
 RUN printf '%s\n' '#!/bin/sh' \
   'for file in $DOCKER_ONRUN_DIR/*; do chmod +x "$file"; done' > \
   $DOCKER_ONRUN_DIR/00-fixperms.sh && chmod +x $DOCKER_ONRUN_DIR/00-fixperms.sh
-

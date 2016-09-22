@@ -1,15 +1,16 @@
-# config/application.yml
-defaults: &defaults
-  cool:
-    sweet: nested settings
-  from: alpine:3.2
-
-development:
-  <<: *defaults
+defaults: 
+  cool: 
+    sweet: "nested settings"
+  from: "alpine:3.1"
+development: 
+  cool: 
+    sweet: "nested settings"
   neat_setting: 800
-
-test:
-  <<: *defaults
-
-production:
-  <<: *defaults
+test: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99
+production: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99

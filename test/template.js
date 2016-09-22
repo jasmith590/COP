@@ -8,7 +8,7 @@ describe('CLI - Valid Templates', function() {
         it("Valid template type", function(done) {
             exec(helpers.appRoot + 'bin/cop --input examples/setting.json --template examples/views/Dockerfile.hbs',
                 function(error, stdout, stderr) {
-                    expect(stdout).to.equal(helpers.readFixture("Dockerfile01"));
+                    expect(stdout.trim()).to.equal(helpers.readFixture("Dockerfile01"));
                     done();
                 });
         });
@@ -16,7 +16,7 @@ describe('CLI - Valid Templates', function() {
         it("Valid template type with multiple inputs", function(done) {
             exec(helpers.appRoot + 'bin/cop --input examples/setting.json,examples/setting.yml --template examples/views/Dockerfile.hbs',
                 function(error, stdout, stderr) {
-                    expect(stdout).to.equal(helpers.readFixture("Dockerfile02"));
+                    expect(stdout.trim()).to.equal(helpers.readFixture("Dockerfile02"));
                     done();
                 });
         });
