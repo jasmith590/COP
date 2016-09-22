@@ -28,6 +28,9 @@ Command line:
      # reads xml file and prints it in yml
      $ bin/cop --input examples/setting.xml --to yaml
      
+     # reads directory of inputs and prints it in yml
+     $ bin/cop --input examples/ --to yaml
+     
      # reads yaml and prints it in json
      $ bin/cop --input examples/setting.yml --to json
      
