@@ -6,42 +6,38 @@ var handy = require('handy');
 
 var doc = "",
     stdIn = process.stdin,
-    inputformat, outputformat;
+    outputformat;
 
 /**
  * Setup Input and Output
  */
 program
     .version('v' + cop.version)
-    .option('-i, --input <input>', 'Input file')
-    .option('-f, --from <format>', 'Input format')
-    .option('-t, --to <format>', 'Output format')
-    .option('-T, --template [template]', 'Template')
+    .option('--yml, --yaml', 'Render as YAML', inputCoercion.bind(null, 'yml'))
+    .option('--json', 'Render as JSON', inputCoercion.bind(null, 'json'))
+    .option('--xml', 'Render as XML', inputCoercion.bind(null, 'xml'))
+    .option('--render-as <format>', 'Render format')
+    .option('-t, --render-template [template]', 'Rendering template')
     .parse(process.argv)
     .on('--help', function(){
         console.log('  Examples:');
         console.log('');
-        console.log('    $ cat examples/setting.xml | bin/cop --from xml --to json');
-        console.log('    $ bin/cop --input examples/setting.xml --to json');
-        console.log('    $ bin/cop --input examples/setting.json,examples/setting.yml --to json');
-        console.log('    $ bin/cop --input examples/setting.json,examples/setting.yml --template examples/views/Dockerfile.hbs');
+        console.log('    $ bin/cop --yml examples/setting.json');
+        console.log('    $ bin/cop --yml examples/setting.json examples/setting.yml');
+        console.log('    $ bin/cop --render-template examples/views/Dockerfile.hbs examples/setting.json examples/setting.yml');
         console.log('');
     });
 
-if (program.input) {
-    inputformat = handy.getFileExtension(program.input, 'json');
-    outputformat = handy.getFileExtension(program.output, 'json');
-
+if (program.args.length > 0) {
     if (!process.argv.slice(2).length) {
         showHelp();
     }
 
     // output to stdout
-    output(true, program.input, program.to);
+    output(program.args, program.renderAs);
 
 } else {
-    outputformat = program.to;
-    inputformat = program.from;
+    outputformat = program.renderAs;
 
     if (!process.argv.slice(2).length) {
         showHelp();
@@ -53,7 +49,7 @@ if (program.input) {
 
     stdIn.on('end', () => {
         // output to stdout
-        output(false, doc, outputformat, inputformat);
+        output(doc, outputformat);
     });
 
     stdIn.on('readable', () => {
@@ -65,28 +61,28 @@ if (program.input) {
     stdIn.on('error', process.exit);
 }
 
-function output (fileToLoad, input, outputformat, inputformat) {
+function output (input, outputformat) {
 
     // convert yml to yaml
     outputformat = (!outputformat || outputformat == 'yml') ? 'yaml' : outputformat;
 
     // load appropriate format
-    if(fileToLoad) {
-        // gather all input streams
-        doc = cop.gatherInputs(input);
-    } else {
-        doc = cop.gatherInputs(input, inputformat);
-    }
+    doc = cop.gatherInputs(input);
 
-    if(!program.template) {
+    if(!program.renderTemplate) {
         console.log(cop.format[outputformat].stringify(doc));
     } else {
-        console.log(cop.render(program.template, doc));
+        console.log(cop.render(program.renderTemplate, doc));
     }
-
 }
 
 function showHelp() {
     program.outputHelp();
     process.exit(1);
+}
+
+function inputCoercion(val) {
+    if(typeof val !== "undefined" && cop.isValidFormat(val)) {
+        program.renderAs = val;
+    }
 }
