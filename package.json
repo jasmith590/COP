@@ -2,8 +2,8 @@
   "name": "cop",
   "description": "load/convert between xml,json,yaml,shell formats",
   "homepage": "https://github.com/BlueAcornInc/devops-cop",
-  "version": "0.2.9",
-  "author": "el aras + Jamie Smith",
+  "version": "0.1.0",
+  "author": "Jamie Smith",
   "license": "UNLICENSED",
   "dependencies": {
     "commander": "^2.9.0",
@@ -25,7 +25,9 @@
     "convertor",
     "json",
     "xml",
-    "yaml"
+    "yaml",
+    "handlebars",
+    "templates"
   ],
   "repository": {
     "type": "git",

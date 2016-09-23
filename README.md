@@ -26,22 +26,19 @@ Comes with command line options to use the convertors along with a library versi
 Command line:
 
      # reads xml file and prints it in yml
-     $ bin/cop --input examples/setting.xml --to yaml
+     $ bin/cop --yml examples/setting.xml
      
      # reads directory of inputs and prints it in yml
-     $ bin/cop --input examples/ --to yaml
+     $ bin/cop --yaml examples/
      
      # reads yaml and prints it in json
-     $ bin/cop --input examples/setting.yml --to json
-     
-     # Accepts input from STDIN
-     $ cat examples/setting.xml | bin/cop --from xml --to json
+     $ bin/cop examples/setting.yml --json
      
      # Accepts multiple inputs
-     $ bin/cop --input examples/setting.json,examples/setting.yml --to json
+     $ bin/cop --json examples/setting.json examples/setting.yml
      
      # Renders and compile templates to STDOUT 
-     $ bin/cop --input examples/setting.json,examples/setting.yml --template examples/views/Dockerfile.hbs
+     $ bin/cop --render-template examples/views/Dockerfile.hbs examples/setting.json examples/setting.yml
 
 Within your program:
 
