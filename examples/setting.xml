@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<config>
+    <defaults>
+        <cool>
+            <sweet>nested settings</sweet>
+        </cool>
+        <from>alpine:3.1</from>
+    </defaults>
+    <development>
+        <cool>
+            <sweet>nested settings</sweet>
+        </cool>
+        <neat_setting>800</neat_setting>
+    </development>
+    <test>
+        <cool>
+            <sweet>nested settings</sweet>
+        </cool>
+        <neat_setting>99</neat_setting>
+    </test>
+    <production>
+        <cool>
+            <sweet>nested settings</sweet>
+        </cool>
+        <neat_setting>99</neat_setting>
+    </production>
+</config>
