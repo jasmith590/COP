@@ -1,16 +1,17 @@
-REPORTER = spec
+PROJECT = "COP"
 
-test: test-unit
+test: ;@echo "Testing ${PROJECT}....."; \
+	export NODE_PATH=.; \
+	./node_modules/mocha/bin/mocha;
 
-test-unit:
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--reporter $(REPORTER)
+install: ;@echo "Installing ${PROJECT}....."; \
+	npm install
 
-test-cov: lib-cov
-	@EXPRESS_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
+update: ;@echo "Updating ${PROJECT}....."; \
+	git pull --no-ff; \
+	npm install
 
-lib-cov:
-	@jscoverage lib lib-cov
+clean : ;
+	rm -rf node_modules
 
-.PHONY: test test-unit
-
+.PHONY: test server install clean update

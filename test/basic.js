@@ -1,33 +1,26 @@
-var to=require('..');
-var assert=require('assert');
-var handy=require('handy');
+var cop = require('..');
+var expect = require("chai").expect;
 
-// verify basic functions
-// - load
-// - stringify
-describe('basic', function() {
-  before(function(done) {
-    done();
-  });
+describe('basic', function () {
+    describe('list of modules', function () {
+        var modulesAvailable = ['json', 'yaml', 'xml'];
 
-  // -- check list of modules
-  describe('list of modules', function() {
-    var modulesAvailable = ['json', 'yaml', 'xml'];
-    it('should return the following modules', function(done) {
-      assert.equal(handy.isArrayEqual(Object.keys(to.format), modulesAvailable), true);
-      done();
+        it('should return the following modules', function (done) {
+            expect(Object.keys(cop.format)).to.have.lengthOf(modulesAvailable.length);
+            done();
+        });
+
+        it('check valid formats', function (done) {
+            for (var i = 0; i < modulesAvailable.length; i++) {
+                expect(cop.isValidFormat(modulesAvailable[i]), true).to.be.true;
+            }
+            done();
+        });
+
+        it('check invalid format', function (done) {
+            expect(cop.isValidFormat('html'), true).to.be.false;
+            done();
+        });
     });
-    it('check valid formats', function(done) {
-      for(var i =0;i<modulesAvailable.length;i++) {
-        assert.equal(to.isValidFormat(modulesAvailable[i]),true);
-      }
-      assert.equal(to.isValidFormat('yml'),true);
-      done();
-    });
-    it('check invalid format', function(done) {
-      assert.equal(to.isValidFormat('html'),false);
-      done();
-    });
-  });
 
 });

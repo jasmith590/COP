@@ -1,0 +1,19 @@
+
+  Usage: cop [options]
+
+  Options:
+
+    -h, --help                        output usage information
+    -V, --version                     output the version number
+    --yml, --yaml                     Render as YAML
+    --json                            Render as JSON
+    --xml                             Render as XML
+    --render-as <format>              Render format
+    -t, --render-template [template]  Rendering template
+
+  Examples:
+
+    $ bin/cop --yml examples/setting.json
+    $ bin/cop --yml examples/setting.json examples/setting.yml
+    $ bin/cop --render-template examples/views/Dockerfile.hbs examples/setting.json examples/setting.yml
+
