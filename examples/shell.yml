@@ -6,20 +6,14 @@ development:
   cool: 
     sweet: "nested settings"
   neat_setting: 800
-  from: "alpine:3.3"
 test: 
   cool: 
     sweet: "nested settings"
   neat_setting: 99
-  from: "alpine:3.3"
 production: 
   cool: 
     sweet: "nested settings"
   neat_setting: 99
-  from: "alpine:3.3"
-site_urls: 
+site_urls:
   - "http://php.dev"
   - "http://ba.dev"
-subsetting: 
-  i: 
-    am: groot

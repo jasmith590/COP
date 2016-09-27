@@ -3,7 +3,7 @@ var expect = require("chai").expect;
 
 describe('basic', function () {
     describe('list of modules', function () {
-        var modulesAvailable = ['json', 'yaml', 'xml'];
+        var modulesAvailable = ['json', 'yaml', 'xml', 'shell'];
 
         it('should return the following modules', function (done) {
             expect(Object.keys(cop.format)).to.have.lengthOf(modulesAvailable.length);
