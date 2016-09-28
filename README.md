@@ -56,3 +56,18 @@ To execute full test cases
 
     $ make
 
+
+## Adding Rendering Engines
+Adding another rendering engine requires two main things
+
+First edit the file [template.js](/lib/template.js). Add the extension and filename.
+
+```javascript
+// Main template typecasting
+var templateTypes = {
+    hbs: 'handlebars.js',
+    ext: 'file name of rendering module in views'
+};
+```
+
+The add your rendering module within (views)[/lib/views/]. For an example of a template module, view this [file](/lib/views/handlebars.js)
