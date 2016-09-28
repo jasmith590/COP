@@ -4,9 +4,9 @@ collection of convertors.
 Comes with command line options to use the convertors along with a library version that can be used within programs as well.
 
 # Solves
-  * read input formats json, xml, yaml 
+  * read input formats json, xml, yaml, shell VARs 
   * converts the document to internal javascript object form
-  * write output as json, yaml and xml documents
+  * write output as json, yaml, shell VARs and xml documents
   * converts handlebars template files
 
 ## Installation
@@ -33,6 +33,9 @@ Command line:
      
      # reads yaml and prints it in json
      $ bin/cop examples/setting.yml --json
+     
+     # reads shell VARs and prints it in json
+     $ bin/cop examples/shell.vars --json
      
      # Accepts multiple inputs
      $ bin/cop --json examples/setting.json examples/setting.yml
