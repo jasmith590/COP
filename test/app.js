@@ -52,6 +52,12 @@ describe('APP Tests', function() {
             expect(cop.format.shell.stringify(doc)).to.equal(helpers.readFixture('.envars.txt'));
             done();
         });
+
+        it("Shell VAR to YAML", function(done) {
+            let doc = cop.gatherInputs(helpers.exampleRoot + 'shell.vars');
+            expect(cop.format.yaml.stringify(doc)).to.equal(helpers.readFixture('shell.yml'));
+            done();
+        });
     });
 
 });

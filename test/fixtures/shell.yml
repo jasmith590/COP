@@ -1,0 +1,19 @@
+defaults: 
+  cool: 
+    sweet: "nested settings"
+  from: "alpine:3.3"
+development: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 800
+test: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99
+production: 
+  cool: 
+    sweet: "nested settings"
+  neat_setting: 99
+site_urls: 
+  - "http://php.dev"
+  - "http://ba.dev"
