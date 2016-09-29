@@ -50,6 +50,9 @@ Within your program:
     # Load yaml
     var doc = cop.gatherInputs('setting.yml');
     
+    # Load multiple files
+    var doc = cop.gatherInputs(['setting.yml', 'setting.xml']);
+    
     # print doc in yaml 
     console.log(cop.format.yaml.stringify(doc));
     
