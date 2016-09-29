@@ -58,6 +58,12 @@ describe('APP Tests', function() {
             expect(cop.format.yaml.stringify(doc)).to.equal(helpers.readFixture('shell.yml'));
             done();
         });
+
+        it("Multiple inputs", function(done) {
+            let doc = cop.gatherInputs([helpers.exampleRoot + 'setting.json', helpers.exampleRoot + 'setting.xml']);
+            expect(cop.format.json.stringify(doc)).to.equal(helpers.readFixture('setting.json'));
+            done();
+        });
     });
 
 });
