@@ -1,9 +1,11 @@
 var cop = require('..');
 var expect = require("chai").expect;
+var _ = require('lodash');
+var helpers = require('./helpers');
 
 describe('basic', function () {
     describe('list of modules', function () {
-        var modulesAvailable = ['json', 'yaml', 'xml'];
+        var modulesAvailable = ['json', 'yaml', 'xml', 'shell'];
 
         it('should return the following modules', function (done) {
             expect(Object.keys(cop.format)).to.have.lengthOf(modulesAvailable.length);
@@ -22,5 +24,23 @@ describe('basic', function () {
             done();
         });
     });
+
+    describe('getSupportedExtension()', function () {
+        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf'];
+        var fileExt = require(helpers.appRoot + 'lib/fileExt');
+
+        modulesAvailable.forEach(function(module) {
+            it(module, function(done) {
+                expect(fileExt.getSupportedExtension(this.test.title)).to.be.ok
+                done();
+            });
+        });
+    });
+
+    function getSupportedExtension() {
+        return Array.prototype.slice.call(arguments).reduce(function(prev, curr) {
+            return prev + curr;
+        }, 0);
+    }
 
 });
