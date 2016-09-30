@@ -6,6 +6,7 @@
     -h, --help                        output usage information
     -V, --version                     output the version number
     --yml, --yaml                     Render as YAML
+    --shell                           Render as Shell VARS
     --json                            Render as JSON
     --xml                             Render as XML
     --render-as <format>              Render format

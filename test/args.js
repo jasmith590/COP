@@ -38,4 +38,11 @@ describe('CLI - Input Arguements', function() {
             done();
         });
     });
+
+    it("Skips over comments within Shell VARs", function(done) {
+        exec(helpers.appRoot + 'bin/cop --yaml examples/shell.vars', function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("shell.yml"));
+            done();
+        });
+    });
 });

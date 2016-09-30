@@ -14,6 +14,7 @@ var doc = "",
 program
     .version('v' + cop.version)
     .option('--yml, --yaml', 'Render as YAML', inputCoercion.bind(null, 'yml'))
+    .option('--shell', 'Render as Shell VARS', inputCoercion.bind(null, 'shell'))
     .option('--json', 'Render as JSON', inputCoercion.bind(null, 'json'))
     .option('--xml', 'Render as XML', inputCoercion.bind(null, 'xml'))
     .option('--render-as <format>', 'Render format')

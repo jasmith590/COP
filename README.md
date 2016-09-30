@@ -4,9 +4,9 @@ collection of convertors.
 Comes with command line options to use the convertors along with a library version that can be used within programs as well.
 
 # Solves
-  * read input formats json, xml, yaml 
+  * read input formats json, xml, yaml, shell VARs 
   * converts the document to internal javascript object form
-  * write output as json, yaml and xml documents
+  * write output as json, yaml, shell VARs and xml documents
   * converts handlebars template files
 
 ## Installation
@@ -34,6 +34,9 @@ Command line:
      # reads yaml and prints it in json
      $ bin/cop examples/setting.yml --json
      
+     # reads shell VARs and prints it in json
+     $ bin/cop examples/shell.vars --json
+     
      # Accepts multiple inputs
      $ bin/cop --json examples/setting.json examples/setting.yml
      
@@ -47,6 +50,9 @@ Within your program:
     # Load yaml
     var doc = cop.gatherInputs('setting.yml');
     
+    # Load multiple files
+    var doc = cop.gatherInputs(['setting.yml', 'setting.xml']);
+    
     # print doc in yaml 
     console.log(cop.format.yaml.stringify(doc));
     
@@ -56,3 +62,18 @@ To execute full test cases
 
     $ make
 
+
+## Adding Rendering Engines
+Adding another rendering engine requires two main things
+
+First edit the file [template.js](/lib/template.js). Add the extension and filename.
+
+```javascript
+// Main template typecasting
+var templateTypes = {
+    hbs: 'handlebars.js',
+    ext: 'file name of rendering module in views'
+};
+```
+
+The add your rendering module within (views)[/lib/views/]. For an example of a template module, view this [file](/lib/views/handlebars.js)
