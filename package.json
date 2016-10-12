@@ -11,6 +11,7 @@
     "handlebars": "*",
     "handy": "*",
     "htmlparser": "*",
+    "nunjucks": "*",
     "js-yaml": "*",
     "js2xmlparser": "*",
     "lodash": "*",

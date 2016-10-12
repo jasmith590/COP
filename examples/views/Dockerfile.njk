@@ -1,0 +1,45 @@
+# blueacorn base alpine image
+#  includes /entrypoint.d pattern
+
+FROM {{ defaults.from }}
+
+# Install core packages
+#######################
+
+RUN apk add --update \
+    bash \
+    curl \
+    openssl \
+    openssh-client && \
+    rm -rf /var/cache/apk/*
+
+# for templating
+RUN curl -Lfo /usr/bin/substenv \
+  https://blueacorn:pass4blueacorn@files.badevops.com/util/substenv.musl && \
+  chmod +x /usr/bin/substenv
+
+# rename UID: 33 to www-data to match Debian
+RUN sed -i 's/^xfs:/www-data:/' /etc/passwd && \
+    sed -i 's/^xfs:x:33:xfs/www-data:x:33:www-data/' /etc/group
+
+
+# GLOBAL VARS
+#############
+
+ENV DOCKER_DIR="/docker" \
+    DOCKER_CACHE_DIR="$DOCKER_DIR/cache" \
+    DOCKER_ONRUN_DIR="$DOCKER_DIR/entrypoint.d"
+
+RUN mkdir -p $DOCKER_DIR $DOCKER_CACHE_DIR $DOCKER_ONRUN_DIR
+
+
+# IMAGE RUNTIME
+###############
+
+COPY docker-entrypoint.sh $DOCKER_DIR/entrypoint.sh
+ENTRYPOINT ["/docker/entrypoint.sh"]
+
+# fixperms helper so you don't need to chmod +x files added to DOCKER_ONRUN_DIR
+RUN printf '%s\n' '#!/bin/sh' \
+  'for file in $DOCKER_ONRUN_DIR/*; do chmod +x "$file"; done' > \
+  $DOCKER_ONRUN_DIR/00-fixperms.sh && chmod +x $DOCKER_ONRUN_DIR/00-fixperms.sh
