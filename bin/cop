@@ -73,7 +73,14 @@ function output (input, outputformat) {
     if(!program.renderTemplate) {
         console.log(cop.format[outputformat].stringify(doc));
     } else {
-        console.log(cop.render(program.renderTemplate, doc));
+        // asynchronously render templates via errback fn
+        cop.render(program.renderTemplate, doc, function(err, out){
+          if(err){
+            console.error(err);
+            process.exit(1);
+          }
+          console.log(out);
+        });
     }
 }
 
