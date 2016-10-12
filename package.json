@@ -14,8 +14,7 @@
     "nunjucks": "*",
     "js-yaml": "*",
     "js2xmlparser": "*",
-    "lodash": "*",
-    "underscore": "*"
+    "lodash": "*"
   },
   "devDependencies": {
     "chai": "^3.5.0",
