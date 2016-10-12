@@ -21,6 +21,16 @@ program
     .option('-t, --render-template [template]', 'Rendering template')
     .parse(process.argv)
     .on('--help', function(){
+
+        let engines = Object.keys(cop.templateEngines);
+        console.log('  Template Engines:');
+        for(var i = 0; i < engines.length; i++) {
+            console.log('    ' + engines[i] + ' -' + cop.templateEngines[engines[i]].map(function(ext){
+                return " *." + ext;
+            }));
+        }
+        console.log('');
+
         console.log('  Examples:');
         console.log('');
         console.log('    $ bin/cop --yml examples/setting.json');
