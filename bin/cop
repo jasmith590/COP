@@ -21,6 +21,16 @@ program
     .option('-t, --render-template [template]', 'Rendering template')
     .parse(process.argv)
     .on('--help', function(){
+
+        let engines = Object.keys(cop.templateEngines);
+        console.log('  Template Engines:');
+        for(var i = 0; i < engines.length; i++) {
+            console.log('    ' + engines[i] + ' -' + cop.templateEngines[engines[i]].map(function(ext){
+                return " *." + ext;
+            }));
+        }
+        console.log('');
+
         console.log('  Examples:');
         console.log('');
         console.log('    $ bin/cop --yml examples/setting.json');
@@ -73,7 +83,14 @@ function output (input, outputformat) {
     if(!program.renderTemplate) {
         console.log(cop.format[outputformat].stringify(doc));
     } else {
-        console.log(cop.render(program.renderTemplate, doc));
+        // asynchronously render templates via errback fn
+        cop.render(program.renderTemplate, doc, function(err, out){
+          if(err){
+            console.error(err);
+            process.exit(1);
+          }
+          console.log(out);
+        });
     }
 }
 

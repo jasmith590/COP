@@ -1,0 +1,41 @@
+
+<!-- example:
+   [user] pushed to branch [branch] of [repo] - see [changes]
+     + [commit message] [commit sha]
+     + [commit message] [commit sha]
+-->
+
+<var branch=data.ref.replace('refs/heads/','') />
+
+<a href="${data.sender.html_url}">${data.sender.login}</a>&nbsp;
+
+<if(data.deleted)>
+  <em>deleted</em> branch&nbsp;
+</if>
+<else>
+  <em><strong if(data.forced)>force</strong> pushed</em> to branch&nbsp;
+</else>
+
+<a href="${data.repository.html_url}/tree/${branch}">${branch}</a> of
+<a href="${data.repository.html_url}">${data.repository.full_name}</a>
+
+<if(data.commits && data.commits.length)>
+  &nbsp;(<a href="${data.compare}">diff</a>)
+
+  <br />
+
+  <ul>
+    <for(commit in data.commits | status-var=loop)>
+      <if(loop.getIndex() <= 7)>
+        <li>
+          ${commit.message}
+          (<a href="${commit.url}">${commit.id.substring(0,7)}</a>)
+
+          <if(loop.getIndex() == 7 && loop.getLength() > 8)>
+            &hellip; and ${loop.getLength() - loop.getIndex()} more!
+          </if>
+        </li>
+      </if>
+    </for>
+  </ul>
+</if>
