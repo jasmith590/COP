@@ -81,17 +81,18 @@ function output (input, outputformat) {
     // load appropriate format
     doc = cop.gatherInputs(input);
 
-    if(!program.renderTemplate) {
-        console.log(cop.format[outputformat].stringify(doc));
+    if(program.renderTemplate) {
+      // asynchronously render templates via errback fn
+      cop.render(program.renderTemplate, doc, function(err, out){
+        if(err){
+          console.error(err);
+          process.exit(1);
+        }
+        console.log(out);
+      });
     } else {
-        // asynchronously render templates via errback fn
-        cop.render(program.renderTemplate, doc, function(err, out){
-          if(err){
-            console.error(err);
-            process.exit(1);
-          }
-          console.log(out);
-        });
+      // render merged configuration inputs
+      console.log(cop.format[outputformat].stringify(doc));
     }
 }
 
