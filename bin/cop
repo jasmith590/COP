@@ -24,6 +24,7 @@ program
 
         let engines = Object.keys(cop.templateEngines);
         console.log('  Template Engines:');
+        console.log('');
         for(var i = 0; i < engines.length; i++) {
             console.log('    ' + engines[i] + ' -' + cop.templateEngines[engines[i]].map(function(ext){
                 return " *." + ext;
