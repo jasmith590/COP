@@ -1,5 +1,7 @@
 PROJECT = "COP"
 
+default: install
+
 test: ;@echo "Testing ${PROJECT}....."; \
 	export NODE_PATH=.; \
 	unset COP_PREFIX; \

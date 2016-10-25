@@ -18,7 +18,7 @@
     xml - *.xml
     yaml - *.yml, *.yaml
     json - *.json
-    shell - *.vars, *.env, *.conf
+    shell - *.vars, *.env, *.conf, *.shell
 
  Template Engines:
 

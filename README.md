@@ -21,7 +21,7 @@ Comes with command line options to use the convertors along with a library versi
     
     OR 
     
-    $ make install
+    $ make
 
 ## Usage
 
@@ -88,7 +88,7 @@ config__1__commit__url="https://api.github.com/repos/jasmith590/COP/commits/0c42
 ## Test cases
 To execute full test cases
 
-    $ make
+    $ make test
 
 
 ## Adding Rendering Engines

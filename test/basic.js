@@ -26,7 +26,7 @@ describe('basic', function () {
     });
 
     describe('getSupportedExtension()', function () {
-        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf'];
+        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf', 'shell'];
 
         modulesAvailable.forEach(function(module) {
             it(module, function(done) {

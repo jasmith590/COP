@@ -86,17 +86,23 @@ function output (args, input, outputformat, inputformat) {
     // convert yml to yaml
     outputformat = (!outputformat || outputformat == 'yml') ? 'yaml' : outputformat;
 
-    if (program.renderTemplate || cop.checkStdInType(inputformat) === "template") {
-        doc = inputformat ? input : cop.gatherInputs(args);
-        let templatePath = cop.checkStdInType(inputformat) ? cop.saveTmpFile(input, inputformat) : program.renderTemplate;
+    // If coming from STDIN
+    if(inputformat) {
+        let stdInFilePath = cop.saveTmpFile(input, inputformat);
 
-        // If coming from STDIN
-        if(inputformat) {
-            doc = cop.checkStdInType(inputformat) === "template" ? cop.gatherInputs(args) : input;
+        if(cop.checkStdInType(inputformat) === "template"){
+            program.renderTemplate = stdInFilePath;
+        } else {
+            args.unshift(stdInFilePath);
         }
+    }
 
+    // Gather Inputs
+    doc = cop.gatherInputs(args);
+
+    if (program.renderTemplate || cop.checkStdInType(inputformat) === "template") {
         // asynchronously render templates via errback fn
-        cop.render(templatePath, doc, function (err, out) {
+        cop.render(program.renderTemplate, doc, function (err, out) {
             if (err) {
                 console.error(err);
                 process.exit(1);
@@ -104,7 +110,8 @@ function output (args, input, outputformat, inputformat) {
             console.log(out);
         });
     } else {
-        doc = inputformat ? cop.gatherInputs(input, inputformat) : cop.gatherInputs(args);
+        doc = cop.gatherInputs(args);
+
         // render merged configuration inputs
         console.log(cop.format[outputformat].stringify(doc));
     }
