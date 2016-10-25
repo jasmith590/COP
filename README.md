@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jasmith590/COP.svg?branch=develop)](https://travis-ci.org/jasmith590/COP)
+
 # COP - Configuration Option Parser
 
 collection of convertors.
