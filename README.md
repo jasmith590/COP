@@ -96,11 +96,13 @@ Adding another rendering engine requires two main things
 
 First edit the file [template.js](/lib/template.js). Add the extension and filename.
 
-```javascript
+```
 // Main template typecasting
-var templateTypes = {
-    hbs: 'handlebars.js',
-    ext: 'file name of rendering module in views'
+var templateEngines = {
+  dust: ['dust'],
+  handlebars: ['hbs','handlebars'],
+  marko: ['marko'],
+  nunjucks: ['njk','nunjucks', 'j2', 'jinja', 'jinja2']
 };
 ```
 
