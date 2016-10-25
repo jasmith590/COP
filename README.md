@@ -66,7 +66,7 @@ Within your program:
 In order to allow better STDIN support, a prefix enviroment variable has been added. In order to use:
 
     $ export COP_PRESET="config"
-    $ $ curl https://api.github.com/repos/jasmith590/COP/tags | bin/cop --shell --stdin-type=json
+    $ curl https://api.github.com/repos/jasmith590/COP/tags | bin/cop --shell --stdin-type=json
     
 What does this do? This allows you to add a prefix to the output formats. For example, if you have a preset of "config__", then [this](https://api.github.com/repos/jasmith590/COP/tags) will turn into the below:
 
@@ -102,4 +102,4 @@ var templateTypes = {
 };
 ```
 
-The add your rendering module within (views)[/lib/views/]. For an example of a template module, view this [file](/lib/views/handlebars.js)
+The add your rendering module within [views](/lib/views/). For an example of a template module, view this [file](/lib/views/handlebars.js)
