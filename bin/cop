@@ -19,18 +19,15 @@ program
     .option('--xml', 'Render as XML', inputCoercion.bind(null, 'xml'))
     .option('--render-as <format>', 'Render format')
     .option('-t, --render-template [template]', 'Rendering template')
+    .option('--stdin-type <format>', 'STDIN format')
     .parse(process.argv)
     .on('--help', function(){
 
-        let engines = Object.keys(cop.templateEngines);
-        console.log('  Template Engines:');
-        console.log('');
-        for(var i = 0; i < engines.length; i++) {
-            console.log('    ' + engines[i] + ' -' + cop.templateEngines[engines[i]].map(function(ext){
-                return " *." + ext;
-            }));
-        }
-        console.log('');
+        // output supporte configuration extension support
+        helpLoop(cop.supportedExts, " Configuration Extensions:");
+
+        // output supported template extension support
+        helpLoop(cop.templateEngines, " Template Engines:");
 
         console.log('  Examples:');
         console.log('');
@@ -40,16 +37,17 @@ program
         console.log('');
     });
 
-if (program.args.length > 0) {
+if (program.args.length > 0 && !program.stdinType) {
     if (!process.argv.slice(2).length) {
         showHelp();
     }
 
     // output to stdout
-    output(program.args, program.renderAs);
+    output(program.args, null, program.renderAs);
 
 } else {
     outputformat = program.renderAs;
+    inputformat = program.stdinType;
 
     if (!process.argv.slice(2).length) {
         showHelp();
@@ -61,7 +59,7 @@ if (program.args.length > 0) {
 
     stdIn.on('end', () => {
         // output to stdout
-        output(doc, outputformat);
+        output(program.args, doc, outputformat, (inputformat ? inputformat : null));
     });
 
     stdIn.on('readable', () => {
@@ -73,31 +71,76 @@ if (program.args.length > 0) {
     stdIn.on('error', process.exit);
 }
 
-function output (input, outputformat) {
-
+/**
+ * Main output method. Determines if from STDIN or input
+ * from flag based options from the program itself.
+ *
+ * @param args - [Array] - program.args
+ * @param input - input stream
+ *  If STDIN, then input = strem, else input = null
+ * @param outputformat - program.renderAs
+ * @param inputformat - program.stdinType
+ *  If STDIN, then inputformat = program.stdinType, else inputformat = null
+ */
+function output (args, input, outputformat, inputformat) {
     // convert yml to yaml
     outputformat = (!outputformat || outputformat == 'yml') ? 'yaml' : outputformat;
 
-    // load appropriate format
-    doc = cop.gatherInputs(input);
+    // If coming from STDIN
+    if(inputformat) {
+        let stdInFilePath = cop.saveTmpFile(input, inputformat);
 
-    if(!program.renderTemplate) {
-        console.log(cop.format[outputformat].stringify(doc));
-    } else {
+        if(cop.checkStdInType(inputformat) === "template"){
+            program.renderTemplate = stdInFilePath;
+        } else {
+            args.unshift(stdInFilePath);
+        }
+    }
+
+    // Gather Inputs
+    doc = cop.gatherInputs(args);
+
+    if (program.renderTemplate || cop.checkStdInType(inputformat) === "template") {
         // asynchronously render templates via errback fn
-        cop.render(program.renderTemplate, doc, function(err, out){
-          if(err){
-            console.error(err);
-            process.exit(1);
-          }
-          console.log(out);
+        cop.render(program.renderTemplate, doc, function (err, out) {
+            if (err) {
+                console.error(err);
+                process.exit(1);
+            }
+            console.log(out);
         });
+    } else {
+        doc = cop.gatherInputs(args);
+
+        // render merged configuration inputs
+        console.log(cop.format[outputformat].stringify(doc));
     }
 }
 
 function showHelp() {
     program.outputHelp();
     process.exit(1);
+}
+
+function helpLoop(object, title) {
+    // Check for if `object` is an "object"
+    if(typeof object !== "object") {
+        console.error("Current object being used within help is not an object");
+        process.exit(1);
+        return;
+    }
+
+    var exts = Object.keys(object);
+    console.log(title || "");
+    console.log('');
+
+    for(var i = 0; i < exts.length; i++) {
+        console.log('    ' + exts[i] + ' -' + object[exts[i]].map(function(ext){
+                return " *." + ext;
+            }));
+    }
+
+    console.log('');
 }
 
 function inputCoercion(val) {

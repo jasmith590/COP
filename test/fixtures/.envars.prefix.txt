@@ -1,0 +1,9 @@
+config__defaults__cool__sweet="nested settings"
+config__defaults__from="alpine:3.3"
+config__development__cool__sweet="nested settings"
+config__development__neat_setting=800
+config__test__cool__sweet="nested settings"
+config__test__neat_setting=99
+config__production__cool__sweet="nested settings"
+config__production__neat_setting=99
+config__site_urls=( "http://php.dev" "http://ba.dev" )
