@@ -15,7 +15,8 @@ describe('CLI - STDIN Support', function() {
     it("Configuration - YAML to Shell w/ COP_PREFIX=\"config__\"", function(done) {
         exec('export COP_PREFIX="config__" && ' +
             'curl -s https://raw.githubusercontent.com/jasmith590/COP/develop/examples/shell.yml | ' +
-            helpers.appRoot + 'bin/cop --shell --stdin-type=yaml', function(error, stdout, stderr) {
+            helpers.appRoot + 'bin/cop --shell --stdin-type=yaml && ' +
+            'unset COP_PREFIX', function(error, stdout, stderr) {
             expect(stdout.trim()).to.equal(helpers.readFixture('.envars.prefix.txt'));
             done();
         });
