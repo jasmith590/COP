@@ -11,3 +11,5 @@ exports.readFixture = function(file) {
 exports.readExample = function(file) {
     return fs.readFileSync(exports.exampleRoot + file, 'utf-8')
 }
+
+exports.coreHelpers = require('../lib/helpers');

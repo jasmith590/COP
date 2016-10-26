@@ -37,7 +37,6 @@
   },
   "main": "index",
   "scripts": {
-    "prepublish": "npm prune",
     "test": "make test"
   },
   "engines": {

@@ -26,12 +26,11 @@ describe('basic', function () {
     });
 
     describe('getSupportedExtension()', function () {
-        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf'];
-        var fileExt = require(helpers.appRoot + 'lib/fileExt');
+        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf', 'shell'];
 
         modulesAvailable.forEach(function(module) {
             it(module, function(done) {
-                expect(fileExt.getSupportedExtension(this.test.title)).to.be.ok
+                expect(helpers.coreHelpers.getSupportedExtension(this.test.title)).to.be.ok
                 done();
             });
         });

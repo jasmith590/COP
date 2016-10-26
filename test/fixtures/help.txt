@@ -11,8 +11,17 @@
     --xml                             Render as XML
     --render-as <format>              Render format
     -t, --render-template [template]  Rendering template
+    --stdin-type <format>             STDIN format
 
-  Template Engines:
+ Configuration Extensions:
+
+    xml - *.xml
+    yaml - *.yml, *.yaml
+    json - *.json
+    shell - *.vars, *.env, *.conf, *.shell
+
+ Template Engines:
+
     dust - *.dust
     handlebars - *.hbs, *.handlebars
     marko - *.marko
