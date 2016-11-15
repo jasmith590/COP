@@ -1,0 +1,19 @@
+---
+test:
+  key: value
+  array_test:
+    - file: /path/to/file.txt
+    - shell: shell coommand
+  mixed_test:
+    - "scalar"
+    - "scalar with \"quo'te's\""
+    - [ "abc", "def" ]
+    - key: valiue with spaces
+    - key: single_nest
+      nest:
+        - nestedkey: value
+    - key: double_nest
+      nest:
+        - nestedKey: value
+          nest:
+            - doubleNestedKey: WORKS!
