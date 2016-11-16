@@ -15,7 +15,7 @@
     "nunjucks": "*",
     "js-yaml": "*",
     "js2xmlparser": "*",
-    "lodash": "*"
+    "lodash": "4.17.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
