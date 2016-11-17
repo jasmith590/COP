@@ -26,9 +26,18 @@ describe('basic', function () {
     });
 
     describe('getSupportedExtension()', function () {
-        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf', 'shell'];
-
-        modulesAvailable.forEach(function(module) {
+        [
+          'env',
+          'html',
+          'js',
+          'json',
+          'jsonp',
+          'shell',
+          'vars',
+          'xml',
+          'yaml',
+          'yml'
+        ].forEach(function(module) {
             it(module, function(done) {
                 expect(helpers.coreHelpers.getSupportedExtension(this.test.title)).to.be.ok
                 done();
