@@ -15,6 +15,7 @@
 
  Configuration Extensions:
 
+    ini - *.ini, *.cfg, *.desktop
     json - *.json, *.jsonp, *.js
     shell - *.shell, *.vars, *.env
     xml - *.xml, *.html

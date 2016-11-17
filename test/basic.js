@@ -5,7 +5,7 @@ var helpers = require('./helpers');
 
 describe('basic', function () {
     describe('list of modules', function () {
-        var modulesAvailable = ['json', 'yaml', 'xml', 'shell'];
+        var modulesAvailable = ['ini','json', 'shell', 'xml', 'yaml'];
 
         it('should return the following modules', function (done) {
             expect(Object.keys(cop.format)).to.have.lengthOf(modulesAvailable.length);

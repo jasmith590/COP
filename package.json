@@ -11,6 +11,7 @@
     "handlebars": "*",
     "handy": "*",
     "htmlparser": "*",
+    "ini": "*",
     "marko": "*",
     "nunjucks": "*",
     "js-yaml": "*",
