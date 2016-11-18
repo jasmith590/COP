@@ -19,8 +19,8 @@ describe('CLI - Input Arguements', function() {
     });
 
     it("Invalid input format type", function(done) {
-        exec(helpers.appRoot + 'bin/cop examples/setting.html', function(error, stdout, stderr) {
-            expect(stderr.trim()).to.have.string("Unknown file format 'html'");
+        exec(helpers.appRoot + 'bin/cop examples/setting.unknown', function(error, stdout, stderr) {
+            expect(stderr.trim()).to.have.string("Unknown file format 'unknown'");
             done();
         });
     });

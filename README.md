@@ -1,27 +1,41 @@
 [![Build Status](https://travis-ci.org/jasmith590/COP.svg?branch=develop)](https://travis-ci.org/jasmith590/COP)
 
-# COP - Configuration Option Parser
+# Configuration Option Parser
 
-collection of convertors.
-Comes with command line options to use the convertors along with a library version that can be used within programs as well.
+Configuration Options Parser (COP) is a collection of convertors that comes with command line options to use the convertors along with a library version that can be used within programs.
 
-# Solves
+## Features
   * read input formats json, xml, yaml, shell VARs 
   * converts the document to internal javascript object form
   * write output as json, yaml, shell VARs and xml documents
-  * converts handlebars template files
+  * STDIN/STDOUT support
+  * converts [Handlebars](http://handlebarsjs.com/) template files
+  * converts [Dust](http://www.dustjs.com/) template files
+  * converts [Marko](http://markojs.com/) template files
+  * converts [Nunjucks](https://mozilla.github.io/nunjucks/) template files
+
+## Want to contribute?
+If you find a bug, have any questions or want to contribute. Be sure to file an issue with the appropiate tag.
+
+If submitting a bug fix or a new component, please send those into ```develop``` currently.
+
+The ```develop``` branch is where we are working on all the new features. It is currently highly experimental and no support building or using it will be provided.
 
 ## Installation
-
-    $ npm install -g cop
-        
-    OR
     
     $ npm install cop
     
     OR 
     
     $ make
+    
+##Download/Clone
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
+
 
 ## Usage
 
@@ -47,6 +61,7 @@ Command line:
      
      # Accept configuration input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/setting.yml | bin/cop --shell --stdin-type=yaml
+     $ echo "defaults__from=\"apline\"" | bin/cop -t examples/views/Dockerfile.hbs --stdin-type=shell
      
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
@@ -107,3 +122,10 @@ var templateEngines = {
 ```
 
 The add your rendering module within [views](/lib/views/). For an example of a template module, view this [file](/lib/views/handlebars.js)
+
+
+##Requirements
+ * Node.js v6.0.0 or newer
+
+##Feature Requests
+If you find COP doesn't support or contain a particular component you think would be useful, please check all the current issues in case someone else requested it first. If not, you can request a new feature by creating an issue on the repo itself.

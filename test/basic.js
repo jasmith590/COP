@@ -5,7 +5,7 @@ var helpers = require('./helpers');
 
 describe('basic', function () {
     describe('list of modules', function () {
-        var modulesAvailable = ['json', 'yaml', 'xml', 'shell'];
+        var modulesAvailable = ['ini','json', 'shell', 'xml', 'yaml'];
 
         it('should return the following modules', function (done) {
             expect(Object.keys(cop.format)).to.have.lengthOf(modulesAvailable.length);
@@ -26,9 +26,18 @@ describe('basic', function () {
     });
 
     describe('getSupportedExtension()', function () {
-        var modulesAvailable = ['json', 'yaml', 'yml', 'xml', 'vars', 'env', 'conf', 'shell'];
-
-        modulesAvailable.forEach(function(module) {
+        [
+          'env',
+          'html',
+          'js',
+          'json',
+          'jsonp',
+          'shell',
+          'vars',
+          'xml',
+          'yaml',
+          'yml'
+        ].forEach(function(module) {
             it(module, function(done) {
                 expect(helpers.coreHelpers.getSupportedExtension(this.test.title)).to.be.ok
                 done();

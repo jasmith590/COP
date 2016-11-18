@@ -15,10 +15,11 @@
 
  Configuration Extensions:
 
-    xml - *.xml
-    yaml - *.yml, *.yaml
-    json - *.json
-    shell - *.vars, *.env, *.conf, *.shell
+    ini - *.ini, *.cfg, *.desktop
+    json - *.json, *.jsonp, *.js
+    shell - *.shell, *.vars, *.env
+    xml - *.xml, *.html
+    yaml - *.yaml, *.yml
 
  Template Engines:
 

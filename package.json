@@ -1,7 +1,7 @@
 {
   "name": "cop",
   "description": "load/convert between xml,json,yaml,shell formats",
-  "homepage": "https://github.com/BlueAcornInc/devops-cop",
+  "homepage": "https://github.com/jasmith590/COP",
   "version": "0.3.0",
   "author": "Jamie Smith",
   "license": "UNLICENSED",
@@ -11,6 +11,7 @@
     "handlebars": "*",
     "handy": "*",
     "htmlparser": "*",
+    "ini": "*",
     "marko": "*",
     "nunjucks": "*",
     "js-yaml": "*",
@@ -33,7 +34,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/BlueAcornInc/devops-cop"
+    "url": "git://github.com/jasmith590/COP"
   },
   "main": "index",
   "scripts": {
