@@ -5,7 +5,7 @@
 Configuration Options Parser (COP) is a collection of convertors that comes with command line options to use the convertors along with a library version that can be used within programs.
 
 ## Features
-  * read input formats json, xml, yaml, shell VARs 
+  * read input formats json, xml, yaml, shell VARs
   * converts the document to internal javascript object form
   * write output as json, yaml, shell VARs and xml documents
   * STDIN/STDOUT support
@@ -22,13 +22,13 @@ If submitting a bug fix or a new component, please send those into ```develop```
 The ```develop``` branch is where we are working on all the new features. It is currently highly experimental and no support building or using it will be provided.
 
 ## Installation
-    
+
     $ npm install cop
-    
-    OR 
-    
+
+    OR
+
     $ make
-    
+
 ##Download/Clone
 Clone the repo using Git:
 
@@ -43,48 +43,48 @@ Command line:
 
      # reads xml file and prints it in yml
      $ bin/cop --yml examples/setting.xml
-     
+
      # reads directory of inputs and prints it in yml
      $ bin/cop --yaml examples/
-     
+
      # reads yaml and prints it in json
      $ bin/cop examples/setting.yml --json
-     
+
      # reads shell VARs and prints it in json
      $ bin/cop examples/shell.vars --json
-     
+
      # Accepts multiple inputs
      $ bin/cop --json examples/setting.json examples/setting.yml
-     
-     # Renders and compile templates to STDOUT 
+
+     # Renders and compile templates to STDOUT
      $ bin/cop --render-template examples/views/Dockerfile.hbs examples/setting.json examples/setting.yml
-     
+
      # Accept configuration input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/setting.yml | bin/cop --shell --stdin-type=yaml
      $ echo "defaults__from=\"apline\"" | bin/cop -t examples/views/Dockerfile.hbs --stdin-type=shell
-     
+
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
 
 Within your program:
 
     var cop = require('cop');
-    
+
     # Load yaml
     var doc = cop.gatherInputs('setting.yml');
-    
+
     # Load multiple files
     var doc = cop.gatherInputs(['setting.yml', 'setting.xml']);
-    
-    # print doc in yaml 
+
+    # print doc in yaml
     console.log(cop.format.yaml.stringify(doc));
 
 ## STDIN Support
 In order to allow better STDIN support, a prefix enviroment variable has been added. In order to use:
 
-    $ export COP_PRESET="config__"
+    $ export COP_PREFIX="config__"
     $ curl https://api.github.com/repos/jasmith590/COP/tags | bin/cop --shell --stdin-type=json
-    
+
 What does this do? This allows you to add a prefix to the output formats. For example, if you have a preset of "config__", then [this](https://api.github.com/repos/jasmith590/COP/tags) will turn into the below:
 
 ```
