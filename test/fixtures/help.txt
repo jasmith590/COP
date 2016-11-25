@@ -12,6 +12,7 @@
     --render-as <format>              Render format
     -t, --render-template [template]  Rendering template
     --stdin-type <format>             STDIN format
+    --filter <pattern>                Regex pattern to match
 
  Configuration Extensions:
 

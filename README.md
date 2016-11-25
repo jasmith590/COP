@@ -65,6 +65,9 @@ Command line:
 
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
+     
+     # Using Regex patterns for filtering root level configurations
+     $ bin/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'
 
 Within your program:
 

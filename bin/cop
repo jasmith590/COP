@@ -20,6 +20,7 @@ program
     .option('--render-as <format>', 'Render format')
     .option('-t, --render-template [template]', 'Rendering template')
     .option('--stdin-type <format>', 'STDIN format')
+    .option('--filter <pattern>', 'Regex pattern to match', collect, [])
     .parse(process.argv)
     .on('--help', function(){
 
@@ -98,7 +99,7 @@ function output (args, input, outputformat, inputformat) {
     }
 
     // Gather Inputs
-    doc = cop.gatherInputs(args);
+    doc = cop.gatherInputs(args, program);
 
     if (program.renderTemplate || cop.checkStdInType(inputformat) === "template") {
         // asynchronously render templates via errback fn
@@ -110,7 +111,7 @@ function output (args, input, outputformat, inputformat) {
             console.log(out);
         });
     } else {
-        doc = cop.gatherInputs(args);
+        doc = cop.gatherInputs(args, program);
 
         // render merged configuration inputs
         console.log(cop.format[outputformat].stringify(doc));
@@ -147,4 +148,9 @@ function inputCoercion(val) {
     if(typeof val !== "undefined" && cop.isValidFormat(val)) {
         program.renderAs = val;
     }
+}
+
+function collect(val, arr) {
+    arr.push(val);
+    return arr;
 }

@@ -45,4 +45,11 @@ describe('CLI - Input Arguements', function() {
             done();
         });
     });
+
+    it("Regex pattern to match support", function(done) {
+        exec(helpers.appRoot + "bin/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'", function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("filtered.yml"));
+            done();
+        });
+    });
 });
