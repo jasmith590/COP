@@ -1,20 +1,30 @@
 PROJECT = "COP"
+.PHONY: test install clean build update
 
-default: install
+default: build
 
-test: ;@echo "Testing ${PROJECT}....."; \
-	export NODE_PATH=.; \
-	unset COP_PREFIX; \
-	./node_modules/mocha/bin/mocha;
+test:
+	@echo "Testing ${PROJECT}....."
+	unset COP_PREFIX;
+	NODE_PATH=. ./node_modules/mocha/bin/mocha
 
-install: ;@echo "Installing ${PROJECT}....."; \
+install: build
+	@echo "Installing ${PROJECT}....."
+	cp build/cop /usr/local/bin/cop
+
+update:
+	@echo "Updating ${PROJECT}....."
+	git pull --no-ff
 	npm install
 
-update: ;@echo "Updating ${PROJECT}....."; \
-	git pull --no-ff; \
+clean :
+	rm -rf build node_modules
+
+build : clean
+	@echo "Building ${PROJECT}....."
+	mkdir build
 	npm install
-
-clean : ;
-	rm -rf node_modules
-
-.PHONY: test server install clean update
+	./node_modules/browserify/bin/cmd.js --node bin/cop -o build/compiled && \
+	echo '#!/usr/bin/env node' > build/cop  && \
+	cat build/compiled >> build/cop
+	chmod +x build/cop

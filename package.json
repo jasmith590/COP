@@ -5,6 +5,9 @@
   "version": "0.3.0",
   "author": "Jamie Smith",
   "license": "UNLICENSED",
+  "bin": {
+    "cop": "bin/cop"
+  },
   "dependencies": {
     "commander": "*",
     "dustjs-linkedin": "*",
@@ -12,13 +15,13 @@
     "handy": "*",
     "htmlparser": "*",
     "ini": "*",
-    "marko": "*",
-    "nunjucks": "*",
     "js-yaml": "*",
     "js2xmlparser": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "nunjucks": "*"
   },
   "devDependencies": {
+    "browserify": "^13.1.1",
     "chai": "^3.5.0",
     "mocha": ">= 1.6.0",
     "should": ">= 1.2.0"

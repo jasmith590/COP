@@ -11,7 +11,6 @@ Configuration Options Parser (COP) is a collection of convertors that comes with
   * STDIN/STDOUT support
   * converts [Handlebars](http://handlebarsjs.com/) template files
   * converts [Dust](http://www.dustjs.com/) template files
-  * converts [Marko](http://markojs.com/) template files
   * converts [Nunjucks](https://mozilla.github.io/nunjucks/) template files
 
 ## Want to contribute?
@@ -37,6 +36,40 @@ Clone the repo using Git:
 Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
     $ npm install cop
+
+    OR
+
+    $ make
+
+##Download/Clone
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
+
+    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ make
+
+##Download/Clone
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
+
+    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
 
     OR
 
@@ -78,7 +111,7 @@ Command line:
 
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
-     
+
      # Using Regex patterns for filtering root level configurations
      $ bin/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'
 
@@ -132,7 +165,6 @@ First edit the file [template.js](/lib/template.js). Add the extension and filen
 var templateEngines = {
   dust: ['dust'],
   handlebars: ['hbs','handlebars'],
-  marko: ['marko'],
   nunjucks: ['njk','nunjucks', 'j2', 'jinja', 'jinja2']
 };
 ```
