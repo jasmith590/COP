@@ -11,7 +11,6 @@ Configuration Options Parser (COP) is a collection of convertors that comes with
   * STDIN/STDOUT support
   * converts [Handlebars](http://handlebarsjs.com/) template files
   * converts [Dust](http://www.dustjs.com/) template files
-  * converts [Marko](http://markojs.com/) template files
   * converts [Nunjucks](https://mozilla.github.io/nunjucks/) template files
 
 ## Want to contribute?
@@ -123,7 +122,6 @@ First edit the file [template.js](/lib/template.js). Add the extension and filen
 var templateEngines = {
   dust: ['dust'],
   handlebars: ['hbs','handlebars'],
-  marko: ['marko'],
   nunjucks: ['njk','nunjucks', 'j2', 'jinja', 'jinja2']
 };
 ```

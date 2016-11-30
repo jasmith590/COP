@@ -18,9 +18,7 @@
     "js-yaml": "*",
     "js2xmlparser": "*",
     "lodash": "*",
-    "marko": "*",
-    "nunjucks": "*",
-    "require-glob": "^3.2.0"
+    "nunjucks": "*"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
