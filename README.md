@@ -23,7 +23,11 @@ The ```develop``` branch is where we are working on all the new features. It is 
 
 ## Installation
 
-    $ npm install cop
+    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
 
     OR
 
@@ -65,7 +69,7 @@ Command line:
 
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
-     
+
      # Using Regex patterns for filtering root level configurations
      $ bin/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'
 
