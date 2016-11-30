@@ -5,6 +5,9 @@
   "version": "0.3.0",
   "author": "Jamie Smith",
   "license": "UNLICENSED",
+  "bin": {
+    "cop": "bin/cop"
+  },
   "dependencies": {
     "commander": "*",
     "dustjs-linkedin": "*",
