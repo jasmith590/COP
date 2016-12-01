@@ -34,8 +34,7 @@ compile: build
 	@echo "Building ${PROJECT}....."
 	@echo "###########################"
 	mkdir build
-	npm install
-	noderify bin/cop > build/compiled && \
+	./node_modules/browserify/bin/cmd.js --node bin/cop -o build/compiled && \
 	echo '#!/usr/bin/env node' > build/cop  && \
 	cat build/compiled >> build/cop
 	chmod +x build/cop
