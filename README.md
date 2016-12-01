@@ -30,7 +30,7 @@ The ```develop``` branch is where we are working on all the new features. It is 
 
     OR
 
-    $ make
+    $ make install
 
 ##Download/Clone
 Clone the repo using Git:

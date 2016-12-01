@@ -3,25 +3,33 @@ PROJECT = "COP"
 
 default: build
 
-test:
+test: build
+	@echo "###########################"
 	@echo "Testing ${PROJECT}....."
+	@echo "###########################"
 	unset COP_PREFIX;
 	NODE_PATH=. ./node_modules/mocha/bin/mocha
 
 install: build
+	@echo "###########################"
 	@echo "Installing ${PROJECT}....."
+	@echo "###########################"
 	cp build/cop /usr/local/bin/cop
 
 update:
+	@echo "###########################"
 	@echo "Updating ${PROJECT}....."
+	@echo "###########################"
 	git pull --no-ff
 	npm install
 
-clean :
+clean:
 	rm -rf build node_modules
 
-build : clean
+build: clean
+	@echo "###########################"
 	@echo "Building ${PROJECT}....."
+	@echo "###########################"
 	mkdir build
 	npm install
 	./node_modules/browserify/bin/cmd.js --node bin/cop -o build/compiled && \

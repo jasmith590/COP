@@ -1,69 +1,55 @@
 var helpers = require('./helpers');
 var expect = require("chai").expect;
-var cop = require('..');
+var exec = require('child_process').exec;
 
-describe('APP Tests', function() {
+describe('Built APP test', function() {
 
-    describe('Config Input Loading', function() {
-        it("JSON to JSON", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.json');
-            expect(cop.format.json.stringify(doc)).to.equal(helpers.readFixture('setting.json'));
-            done();
-        });
-
-        it("JSON to XML", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.json');
-            expect(cop.format.xml.stringify(doc)).to.equal(helpers.readFixture('setting.xml'));
-            done();
-        });
-
-        it("JSON to YAML", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.json');
-            expect(cop.format.yaml.stringify(doc)).to.equal(helpers.readFixture('setting.yml'));
-            done();
-        });
-
-        it("XML to JSON", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.xml');
-            expect(cop.format.json.stringify(doc)).to.equal(helpers.readFixture('setting.json'));
-            done();
-        });
-
-        it("XML to YAML", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.xml');
-            expect(cop.format.yaml.stringify(doc)).to.equal(helpers.readFixture('setting.yml'));
-            done();
-        });
-
-        it("YAML to JSON", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.yml');
-            expect(cop.format.json.stringify(doc)).to.equal(helpers.readFixture('setting.json'));
-            done();
-        });
-
-        it("YAML to XML", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'setting.yml');
-            expect(cop.format.xml.stringify(doc)).to.equal(helpers.readFixture('setting.xml'));
-            done();
-        });
-
-        it("YAML to Shell VAR", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'shell.yml');
-            expect(cop.format.shell.stringify(doc)).to.equal(helpers.readFixture('.envars.txt'));
-            done();
-        });
-
-        it("Shell VAR to YAML", function(done) {
-            let doc = cop.gatherInputs(helpers.exampleRoot + 'shell.vars');
-            expect(cop.format.yaml.stringify(doc)).to.equal(helpers.readFixture('shell.yml'));
-            done();
-        });
-
-        it("Multiple inputs", function(done) {
-            let doc = cop.gatherInputs([helpers.exampleRoot + 'setting.json', helpers.exampleRoot + 'setting.xml']);
-            expect(cop.format.json.stringify(doc)).to.equal(helpers.readFixture('setting.json'));
+    it("Valid input format type - file", function(done) {
+        exec(helpers.appRoot + 'build/cop --yml examples/setting.json', function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("setting.yml"));
             done();
         });
     });
 
+    it("Valid input format type - directoy", function(done) {
+        exec(helpers.appRoot + 'build/cop --yml examples/', function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("dir_settings.yml"));
+            done();
+        });
+    });
+
+    it("Invalid input format type", function(done) {
+        exec(helpers.appRoot + 'build/cop examples/setting.unknown', function(error, stdout, stderr) {
+            expect(stderr.trim()).to.have.string("Unknown file format 'unknown'");
+            done();
+        });
+    });
+
+    it("File does not exist", function(done) {
+        exec(helpers.appRoot + 'build/cop examples/setting.txt', function(error, stdout, stderr) {
+            expect(stderr.trim()).to.have.string("File does not exist 'examples/setting.txt'");
+            done();
+        });
+    });
+
+    it("Valid input for multiple input files", function(done) {
+        exec(helpers.appRoot + 'build/cop --json examples/settings01.yml examples/settings02.yml', function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("settings.json"));
+            done();
+        });
+    });
+
+    it("Skips over comments within Shell VARs", function(done) {
+        exec(helpers.appRoot + 'build/cop --yaml examples/shell.vars', function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("shell.yml"));
+            done();
+        });
+    });
+
+    it("Regex pattern to match support", function(done) {
+        exec(helpers.appRoot + "build/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'", function(error, stdout, stderr) {
+            expect(stdout.trim()).to.equal(helpers.readFixture("filtered.yml"));
+            done();
+        });
+    });
 });
