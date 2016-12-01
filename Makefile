@@ -27,12 +27,15 @@ clean:
 	rm -rf build node_modules
 
 build: clean
+	npm install
+
+compile: build
 	@echo "###########################"
 	@echo "Building ${PROJECT}....."
 	@echo "###########################"
 	mkdir build
 	npm install
-	./node_modules/browserify/bin/cmd.js --node bin/cop -o build/compiled && \
+	noderify bin/cop > build/compiled && \
 	echo '#!/usr/bin/env node' > build/cop  && \
 	cat build/compiled >> build/cop
 	chmod +x build/cop
