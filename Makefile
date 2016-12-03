@@ -3,7 +3,7 @@ PROJECT = "COP"
 
 default: build
 
-test: build
+test:
 	@echo "###########################"
 	@echo "Testing ${PROJECT}....."
 	@echo "###########################"

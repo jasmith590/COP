@@ -22,6 +22,7 @@
     "nunjucks": "*"
   },
   "devDependencies": {
+    "browserify": "^13.1.1",
     "chai": "^3.5.0",
     "mocha": ">= 1.6.0",
     "should": ">= 1.2.0"
