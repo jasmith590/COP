@@ -59,12 +59,12 @@ describe('CLI - Valid Templates', function() {
     });
 
     describe('Marko Templates', function() {
-        it("render github push payload as html", function(done) {
-            exec(helpers.appRoot + 'bin/cop --render-template examples/views/github-push.marko test/fixtures/github-push.json',
-                function(error, stdout, stderr) {
-                    expect(stdout).to.equal(helpers.readFixture("github-push.html"));
-                    done();
-                });
-        });
-    });
+       it("render github push payload as html", function(done) {
+           exec(helpers.appRoot + 'bin/cop --render-template examples/views/github-push.marko test/fixtures/github-push.json',
+               function(error, stdout, stderr) {
+                   expect(stdout).to.equal(helpers.readFixture("github-push.html"));
+                   done();
+               });
+       });
+   });
 });

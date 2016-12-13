@@ -12,4 +12,5 @@ lib-cov
 *~
 node_modules/
 testing
+/build
 

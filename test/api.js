@@ -2,7 +2,7 @@ var helpers = require('./helpers');
 var expect = require("chai").expect;
 var cop = require('..');
 
-describe('APP Tests', function() {
+describe('API Tests', function() {
 
     describe('Config Input Loading', function() {
         it("JSON to JSON", function(done) {

@@ -11,8 +11,8 @@ Configuration Options Parser (COP) is a collection of convertors that comes with
   * STDIN/STDOUT support
   * converts [Handlebars](http://handlebarsjs.com/) template files
   * converts [Dust](http://www.dustjs.com/) template files
-  * converts [Marko](http://markojs.com/) template files
   * converts [Nunjucks](https://mozilla.github.io/nunjucks/) template files
+  * converts [Marko](http://markojs.com/) template files
 
 ## Want to contribute?
 If you find a bug, have any questions or want to contribute. Be sure to file an issue with the appropiate tag.
@@ -41,6 +41,23 @@ Alternatively you can [download](https://github.com/jasmith590/COP/archive/devel
     OR
 
     $ make
+
+##Download/Clone
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
+
+    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ make install
 
 ##Download/Clone
 Clone the repo using Git:
@@ -78,7 +95,7 @@ Command line:
 
      # Accept template input from STDIN
      $ curl https://raw.githubusercontent.com/jasmith590/COP/develop/examples/views/Dockerfile.hbs | bin/cop --stdin-type=hbs examples/setting.json
-     
+
      # Using Regex patterns for filtering root level configurations
      $ bin/cop examples/settings01.yml examples/settings02.yml --yml --filter='^(?!test)'
 
