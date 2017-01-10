@@ -66,6 +66,23 @@ Clone the repo using Git:
 
 Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
+    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
+
+    OR
+
+    $ make install
+
+##Download/Clone
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
+
 
 ## Usage
 
