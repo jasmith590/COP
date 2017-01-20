@@ -17,7 +17,7 @@
     "htmlparser": "*",
     "ini": "*",
     "js-yaml": "*",
-    "marko": "*",
+    "marko": ">=3.14.1",
     "js2xmlparser": "*",
     "lodash": "*",
     "nunjucks": "*"
