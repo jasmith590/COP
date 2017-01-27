@@ -21,7 +21,13 @@ If submitting a bug fix or a new component, please send those into ```develop```
 
 The ```develop``` branch is where we are working on all the new features. It is currently highly experimental and no support building or using it will be provided.
 
-## Installation
+
+##Download/Clone/Installation
+Clone the repo using Git:
+
+```git clone git@github.com:jasmith590/COP.git```
+
+Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
     $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
 
@@ -32,13 +38,6 @@ The ```develop``` branch is where we are working on all the new features. It is 
     OR
 
     $ make install
-
-##Download/Clone
-Clone the repo using Git:
-
-```git clone git@github.com:jasmith590/COP.git```
-
-Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
 
 ## Usage
