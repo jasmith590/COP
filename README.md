@@ -21,28 +21,8 @@ If submitting a bug fix or a new component, please send those into ```develop```
 
 The ```develop``` branch is where we are working on all the new features. It is currently highly experimental and no support building or using it will be provided.
 
-## Installation
-    
-    $ npm install cop
-    
-    OR 
-    
-    $ make
-    
-##Download/Clone
-Clone the repo using Git:
 
-```git clone git@github.com:jasmith590/COP.git```
-
-Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
-
-    $ npm install cop
-
-    OR
-
-    $ make
-
-##Download/Clone
+##Download/Clone/Installation
 Clone the repo using Git:
 
 ```git clone git@github.com:jasmith590/COP.git```
@@ -58,30 +38,6 @@ Alternatively you can [download](https://github.com/jasmith590/COP/archive/devel
     OR
 
     $ make install
-
-##Download/Clone
-Clone the repo using Git:
-
-```git clone git@github.com:jasmith590/COP.git```
-
-Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
-
-    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
-
-    OR
-
-    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
-
-    OR
-
-    $ make install
-
-##Download/Clone
-Clone the repo using Git:
-
-```git clone git@github.com:jasmith590/COP.git```
-
-Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
 
 ## Usage
