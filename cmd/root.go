@@ -17,6 +17,7 @@ package cmd
 import (
     "fmt"
     "os"
+    "strings"
 
     "github.com/spf13/cobra"
     "github.com/spf13/viper"
@@ -29,6 +30,25 @@ var renderAsYml, renderAsXml, renderAsShell, renderAsJson bool
 var RootCmd = &cobra.Command{
     Use:   "COP",
     Short: "COP - Configuration Output Parser",
+    Run: func(cmd *cobra.Command, args []string) {
+        if renderAsYml {
+            fmt.Println("Render as YML")
+        }
+
+        if renderAsJson {
+            fmt.Println("Render as JSON")
+        }
+
+        if renderAsXml {
+            fmt.Println("Render as XML")
+        }
+
+        if renderAsShell {
+            fmt.Println("Render as shell VARs")
+        }
+
+        fmt.Println("Print: " + strings.Join(args, " "))
+    },
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
@@ -42,7 +62,18 @@ func Execute() {
 
 func init() {
     cobra.OnInitialize(initConfig)
-    RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.COP.yaml)")
+
+    // init flags for basic parsing operations
+    RootCmd.Flags().BoolVar(&renderAsYml, "yml", false, "Render as YAML")
+    RootCmd.Flags().BoolVar(&renderAsJson, "json", false, "Render as JSON")
+    RootCmd.Flags().BoolVar(&renderAsXml, "xml", false, "Render as XML")
+    RootCmd.Flags().BoolVar(&renderAsShell, "shell", false, "Render as shell VARs")
+    RootCmd.Flags().StringVar(&renderAs, "render-as", "yml", "Render format")
+    RootCmd.Flags().StringVar(&stdinType, "stdin-type", "", "STDIN format")
+    RootCmd.Flags().StringVar(&filter, "filter", "", "Regex pattern to match")
+
+    // init flags for template command
+    RootCmd.Flags().StringVarP(&renderTemplate, "render-template", "t", "", "Rendering template")
 
 }
 
