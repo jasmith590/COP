@@ -29,11 +29,11 @@ Clone the repo using Git:
 
 Alternatively you can [download](https://github.com/jasmith590/COP/archive/develop.zip) this repository.
 
-    $ npm install git+ssh:git@github.com:jasmith590/COP.git#master
+    $ npm install cop.js
 
     OR
 
-    $ npm install -g git+ssh:git@github.com:jasmith590/COP.git#master
+    $ npm install -g cop.js
 
     OR
 
@@ -74,7 +74,7 @@ Command line:
 
 Within your program:
 
-    var cop = require('cop');
+    var cop = require('cop.js');
 
     # Load yaml
     var doc = cop.gatherInputs('setting.yml');
