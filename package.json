@@ -1,8 +1,8 @@
 {
-  "name": "cop",
+  "name": "cop.js",
   "description": "load/convert between xml,json,yaml,shell formats",
   "homepage": "https://github.com/jasmith590/COP",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "author": "Jamie Smith",
   "license": "UNLICENSED",
   "bin": {
