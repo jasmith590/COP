@@ -2,7 +2,7 @@
   "name": "cop",
   "description": "load/convert between xml,json,yaml,shell formats",
   "homepage": "https://github.com/jasmith590/COP",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "author": "Jamie Smith",
   "license": "UNLICENSED",
   "bin": {
