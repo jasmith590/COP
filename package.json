@@ -12,7 +12,7 @@
     "commander": "*",
     "dustjs-linkedin": "*",
     "ejs": "*",
-    "handlebars": "*",
+    "handlebars": ">=4.0.9",
     "handy": "*",
     "htmlparser": "*",
     "ini": "*",
