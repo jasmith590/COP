@@ -26,7 +26,7 @@
     "browserify": "^14.0.0",
     "chai": "^3.5.0",
     "mocha": ">= 1.6.0",
-    "should": ">= 1.2.0"
+    "should": ">=13.1.0"
   },
   "keywords": [
     "converter",
