@@ -9,7 +9,7 @@
     "cop": "bin/cop"
   },
   "dependencies": {
-    "commander": "*",
+    "commander": ">=2.14.1",
     "dustjs-linkedin": "*",
     "ejs": "*",
     "handlebars": "*",
