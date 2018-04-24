@@ -19,7 +19,7 @@
     "js-yaml": "*",
     "marko": "*",
     "js2xmlparser": "*",
-    "lodash": "*",
+    "lodash": ">=4.17.9",
     "nunjucks": "*"
   },
   "devDependencies": {
