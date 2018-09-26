@@ -63,12 +63,6 @@ if (program.args.length > 0 && !program.stdinType) {
         output(program.args, doc, outputformat, (inputformat ? inputformat : null));
     });
 
-    stdIn.on('readable', () => {
-        if(doc.length === 0){
-            showHelp();
-        }
-    });
-
     stdIn.on('error', process.exit);
 }
 
